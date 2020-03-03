@@ -18,7 +18,13 @@ export const Header = props => {
 			<nav className="header-nav">
 				
 				<div className="header-logo">
-					<p style={{ color: 'white' }}>HeartRep</p>
+					<p style={{
+						color: 'white',
+						marginTop: 20,
+						fontSize: 20,
+					}}>
+						HeartRep
+					</p>
 				</div>
 				
 				<div>

@@ -1,12 +1,31 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 
+// images
 import eye from '../../assets/eye.png';
 import fork from '../../assets/fork.png';
 import star from '../../assets/star.png';
+import Pagination from '../Pagination/Pagination'
 
-export const Card = props => {
-	const { cardList } = props
+const Card = props => {
+	const { cardList, loading } = props
+	
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage] = useState(10)
+	
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
+	const currentPosts = cardList.slice(indexOfFirstPost, indexOfLastPost)
+	
+	const paginate = (pageNumber) => {
+		setCurrentPage(pageNumber)
+	}
+	
+	if(loading) {
+		return (
+			<h2>Loading...</h2>
+		)
+	}
 	
 	return (
 		<div>
@@ -15,15 +34,14 @@ export const Card = props => {
 			</p>
 			
 			{
-				cardList.map((result) => {
+				currentPosts.map((result, index) => {
 					const {
 						name, url, nameWithOwner, owner, watchers, forkCount, stargazers
 					} = result
 					const { login, avatarUrl } = owner
 					console.log(result)
 					return (
-						<div className="App-card">
-							
+						<div className="App-card" key={index}>
 							<div
 								style={{
 									height: '100%',
@@ -85,7 +103,7 @@ export const Card = props => {
 										<div
 											style={{
 												height: '100%',
-												width: '50%',
+												width: '40%',
 											}}
 										>
 											<img
@@ -101,7 +119,6 @@ export const Card = props => {
 										<a
 											style={{
 												textDecoration: 'none',
-												marginTop: '8%'
 											}}
 										>
 											{watchers.totalCount}
@@ -112,7 +129,7 @@ export const Card = props => {
 										<div
 											style={{
 												height: '100%',
-												width: '50%',
+												width: '40%',
 											}}
 										>
 											<img
@@ -128,7 +145,6 @@ export const Card = props => {
 										<a
 											style={{
 												textDecoration: 'none',
-												marginTop: '8%'
 											}}
 										>
 											{stargazers.totalCount}
@@ -139,7 +155,7 @@ export const Card = props => {
 										<div
 											style={{
 												height: '100%',
-												width: '50%',
+												width: '40%',
 											}}
 										>
 											<img
@@ -147,7 +163,7 @@ export const Card = props => {
 													height: '50%',
 													width: '50%',
 													marginLeft: '30%',
-													marginTop: '15%'
+													// marginTop: '15%'
 												}}
 												src={fork}
 												alt="Avatar"
@@ -157,39 +173,27 @@ export const Card = props => {
 										<a
 											style={{
 												textDecoration: 'none',
-												marginTop: '8%'
 											}}
 										>
 											{forkCount}
 										</a>
 									</div>
-									
+								
 								</div>
-								
-								
+							
+							
 							</div>
-							
-							
-							{/*<div*/}
-							{/*	style={{*/}
-							{/*		display: "flex",*/}
-							{/*		justifyContent: "space-between"*/}
-							{/*	}}*/}
-							{/*>*/}
-							{/*	<a*/}
-							{/*		style={{ textDecoration: 'none' }}*/}
-							{/*		target="_blank"*/}
-							{/*		href={`${url}`}*/}
-							{/*	>*/}
-							{/*		{name.charAt(0).toUpperCase() + name.slice(1)}*/}
-							{/*	</a>*/}
-							{/*</div>*/}
 						</div>
 					)
 				})
 			}
 			
-			
+			<Pagination
+				postsPerPage={postsPerPage}
+				totalPosts={cardList.length}
+				paginate={paginate}
+			/>
+		
 		</div>
 	)
 }

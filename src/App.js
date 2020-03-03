@@ -12,8 +12,9 @@ import { gql } from 'apollo-boost';
 import Header from './common/Header'
 
 // styles
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Card from './components/Card'
+import Card from './components/Card/Card'
 
 // Yes, this is an unsafe way ;)
 const TOKEN = process.env.REACT_APP_TOKEN;
@@ -34,15 +35,21 @@ class App extends Component {
 		dataSource: [],
 		cardList: [],
 		searchKey: '',
-		toggleSearchView: true
+		toggleSearchView: false,
+		loading: false
 	}
-	
+
 	/**
 	 * searchForRepos
 	 *
 	 */
 	searchForRepos = () => {
 		const { searchKey } = this.state
+		this.setState((prevState) => {
+			return {
+				loading: !prevState.loading,
+			}
+		})
 		
 		client
 		.query({
@@ -81,20 +88,30 @@ class App extends Component {
 					}
 				}
 			`, variables: { "queryString": searchKey,
-				"first": 5,
+				"first": 100,
 				"after": null }
 		})
 		.then(result => {
-			this.setState({
-				cardList: result.data.search.nodes
+			
+			this.setState((prevState) => {
+				return {
+					loading: !prevState.loading,
+					cardList: result.data.search.nodes
+				}
 			})
+			
 			this.saveSearch(result.data.search.nodes)
 		})
 		.catch((error) => {
 			console.log(error)
+			this.setState((prevState) => {
+				return {
+					loading: !prevState.loading,
+				}
+			})
 		})
 	}
-	
+
 	/**
 	 * onSearchChange
 	 *
@@ -104,7 +121,7 @@ class App extends Component {
 		this.setState({ searchKey });
 		return searchKey.length > 2 && this.searchForRepos()
 	};
-	
+
 	/**
 	 * saveSearch
 	 *
@@ -122,7 +139,7 @@ class App extends Component {
 		
 		this.setState({ dataSource })
 	}
-	
+
 	/**
 	 * onSubmit
 	 *
@@ -131,7 +148,7 @@ class App extends Component {
 	onSubmit = ({ value }) => {
 		this.setState({ searchKey: value }, () => this.toggleSearch())
 	}
-	
+
 	toggleSearch = () => {
 		console.log(this.state.searchKey)
 		this.setState((prevState) => {
@@ -140,16 +157,18 @@ class App extends Component {
 			}
 		}, () => this.searchForRepos())
 	}
-	
+
   render() {
-		const { dataSource, searchKey, toggleSearchView, cardList } = this.state
+		const {
+			dataSource, searchKey, toggleSearchView, cardList, loading
+		} = this.state
 	  
     return (
       <ApolloProvider client={client}>
 	      
 	      <div
 		      style={{
-		      	height: '150vh',
+		      	height: '100vh',
 		      }}
 	      >
 		      <Header
@@ -161,33 +180,17 @@ class App extends Component {
 		      />
 		
 		      <div className="App-body">
-			      <Card
-				      cardList={cardList}
-			      />
-		      </div>
-		
-		      <div
-			      style={{
-				      height: '20vh',
-			      }}
-		      >
-			      <div className="App-pagination">
-				      <p className="App-intro">
-					      <code>About {dataSource.length} results</code>
-				      </p>
-			      </div>
+			      {
+				      toggleSearchView && (
+					      <Card
+						      loading={loading}
+						      cardList={cardList}
+					      />
+				      )
+			      }
 		      </div>
 		     
 	      </div>
-	      
-	     
-		    {/*  /!*{*!/*/}
-			  {/*  /!*  toggleSearchView && (*!/*/}
-				{/*  /!*    <Card*!/*/}
-				{/*	/!*      cardList={cardList}*!/*/}
-				{/*  /!*    />*!/*/}
-			  {/*  /!*  )*!/*/}
-		    {/*  /!*}*!/*/}
       </ApolloProvider>
     );
   }

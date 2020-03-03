@@ -13,7 +13,7 @@
 
 .App-body {
   padding: 100px;
-  height: 130vh;
+  height: 100vh;
   border: 1px solid black;
   overflow: auto;
 }
