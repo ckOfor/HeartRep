@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b87b2e5-7307-4375-b013-3834c37e4c1e" name="Default Changelist" comment="" />
+    <list default="true" id="7b87b2e5-7307-4375-b013-3834c37e4c1e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Card/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/routes.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1YSvR6U4DB0abbx489UJWXYpVQN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -16,8 +32,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/graphql" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -29,6 +46,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/graphql" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/common/Header" />
       <recent name="$PROJECT_DIR$" />
@@ -56,7 +74,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582948798398</updated>
-      <workItem from="1582948799734" duration="13057000" />
+      <workItem from="1582948799734" duration="22763000" />
+      <workItem from="1583182243374" duration="29000" />
+      <workItem from="1583241378551" duration="3667000" />
     </task>
     <servers />
   </component>
@@ -64,6 +84,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="320" y="114" key="#CSS" timestamp="1583145674768">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="114" key="#CSS/0.0.1440.900@0.0.1440.900" timestamp="1583145674768" />
+    <state x="100" y="100" width="1240" height="700" maximized="true" key="DiffContextDialog" timestamp="1583146380652">
+      <screen x="0" y="23" width="1440" height="842" />
+    </state>
+    <state x="100" y="100" width="1240" height="700" maximized="true" key="DiffContextDialog/0.23.1440.842@0.23.1440.842" timestamp="1583146380652" />
     <state width="1419" height="219" key="GridCell.Tab.0.bottom" timestamp="1583077020839">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -80,9 +108,17 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="219" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583077020839" />
-    <state x="377" y="196" width="685" height="508" key="find.popup" timestamp="1583082321382">
+    <state x="479" y="83" key="RollbackChangesDialog" timestamp="1583246600155">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="377" y="196" width="685" height="508" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583082321382" />
+    <state x="479" y="83" key="RollbackChangesDialog/0.0.1440.900@0.0.1440.900" timestamp="1583246600155" />
+    <state x="377" y="196" width="685" height="508" key="find.popup" timestamp="1583182271247">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="377" y="196" width="685" height="508" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583182271247" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1583150241013">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1583150241013" />
   </component>
 </project>

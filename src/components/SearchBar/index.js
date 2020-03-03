@@ -19,12 +19,15 @@ class SearchBar extends React.Component {
 	}
 
 	render () {
-		const { dataSource, onSubmit, searchKey } = this.props
+		const { dataSource, onSubmit, searchKey, toggleSearch } = this.props
 		
 		return (
 			<div>
 				<form>
 					<Select
+						ref={ref => {
+							this.selectRef = ref;
+						}}
 						className={'input'}
 						value={searchKey}
 						onInputChange={this.handleSearchChange}
@@ -32,10 +35,11 @@ class SearchBar extends React.Component {
 						options={dataSource}
 						placeholder={'Search by repository name...'}
 						autoFocus
-						onBlur={() => console.log('sds')}
 						onKeyDown={event => {
 							if ('Enter' === event.key) {
 								event.preventDefault();
+								toggleSearch()
+								this.selectRef.blur()
 							}
 						}}
 					/>

@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .App-logo {
@@ -8,10 +8,36 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
   padding: 20px;
-  color: white;
+}
+
+.App-body {
+  padding: 100px;
+  height: 130vh;
+  border: 1px solid black;
+  overflow: auto;
+}
+
+.App-card {
+  width: 50%;
+  height: 150px;
+  background: #ffffff;
+  margin-bottom: 20px;
+  border: 1px solid #24292f;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.App-bottom-card {
+  width: 30%;
+  height: 30px;
+  background: #ffffff;
+  margin-bottom: 15px;
+  border: 1px solid #24292f;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
 }
 
 .App-title {
@@ -20,6 +46,14 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-pagination {
+  margin-left: 100px;
+}
+
+a:visited {
+  color: #609;
 }
 
 @keyframes App-logo-spin {

@@ -2,21 +2,18 @@
 import React, { Component } from 'react';
 
 // react third-party libraries
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-// constants
-import * as routes from './constants/routes';
-
 // common
 import Header from './common/Header'
 
 // styles
 import './App.css';
+import Card from './components/Card'
 
 // Yes, this is an unsafe way ;)
 const TOKEN = process.env.REACT_APP_TOKEN;
@@ -35,18 +32,10 @@ class App extends Component {
 	
 	state={
 		dataSource: [],
+		cardList: [],
 		searchKey: '',
+		toggleSearchView: true
 	}
-	
-	/**
-	 * onSearchChange
-	 *
-	 * @param value
-	 */
-	onSearchChange = searchKey => {
-		this.setState({ searchKey });
-		return searchKey.length > 3 && this.searchForRepos()
-	};
 	
 	/**
 	 * searchForRepos
@@ -96,19 +85,34 @@ class App extends Component {
 				"after": null }
 		})
 		.then(result => {
-			// console.log(result.data.search.nodes)
+			this.setState({
+				cardList: result.data.search.nodes
+			})
 			this.saveSearch(result.data.search.nodes)
-			
 		})
 		.catch((error) => {
 			console.log(error)
 		})
 	}
 	
+	/**
+	 * onSearchChange
+	 *
+	 * @param value
+	 */
+	onSearchChange = searchKey => {
+		this.setState({ searchKey });
+		return searchKey.length > 2 && this.searchForRepos()
+	};
+	
+	/**
+	 * saveSearch
+	 *
+	 * @param data
+	 */
 	saveSearch = (data) => {
 		const dataSource = []
 		data.map((results) => {
-			console.log(results)
 			const newObject = {
 				value: results.name,
 				label: results.name
@@ -124,34 +128,66 @@ class App extends Component {
 	 *
 	 * @param value
 	 */
-	onSubmit = searchKey => {
-		this.setState({ searchKey });
+	onSubmit = ({ value }) => {
+		this.setState({ searchKey: value }, () => this.toggleSearch())
+	}
+	
+	toggleSearch = () => {
+		console.log(this.state.searchKey)
+		this.setState((prevState) => {
+			return {
+				toggleSearchView: true
+			}
+		}, () => this.searchForRepos())
 	}
 	
   render() {
-		const { dataSource, searchKey } = this.state
-	  console.log(this.state)
+		const { dataSource, searchKey, toggleSearchView, cardList } = this.state
 	  
     return (
       <ApolloProvider client={client}>
-	      <Router>
+	      
+	      <div
+		      style={{
+		      	height: '150vh',
+		      }}
+	      >
 		      <Header
 			      onSearchChange={this.onSearchChange}
 			      onSubmit={this.onSubmit}
 			      dataSource={dataSource}
 			      searchKey={searchKey}
+			      toggleSearch={this.toggleSearch}
 		      />
 		
-		      <Route
-			      exact
-			      path={routes.HOME}
-			      component={() => (
-				      <div className="App-content_large-header">
-				
-				      </div>
-			      )}
-		      />
-	      </Router>
+		      <div className="App-body">
+			      <Card
+				      cardList={cardList}
+			      />
+		      </div>
+		
+		      <div
+			      style={{
+				      height: '20vh',
+			      }}
+		      >
+			      <div className="App-pagination">
+				      <p className="App-intro">
+					      <code>About {dataSource.length} results</code>
+				      </p>
+			      </div>
+		      </div>
+		     
+	      </div>
+	      
+	     
+		    {/*  /!*{*!/*/}
+			  {/*  /!*  toggleSearchView && (*!/*/}
+				{/*  /!*    <Card*!/*/}
+				{/*	/!*      cardList={cardList}*!/*/}
+				{/*  /!*    />*!/*/}
+			  {/*  /!*  )*!/*/}
+		    {/*  /!*}*!/*/}
       </ApolloProvider>
     );
   }

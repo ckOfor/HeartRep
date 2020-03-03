@@ -9,7 +9,8 @@ import SearchBar from '../../components/SearchBar'
 
 export const Header = props => {
 	const {
-		dataSource, onSearchChange, onSubmit, searchKey
+		dataSource, onSearchChange, onSubmit, searchKey,
+		toggleSearch
 	} = props
 	
 	return (
@@ -17,15 +18,12 @@ export const Header = props => {
 			<nav className="header-nav">
 				
 				<div className="header-logo">
-					<a href="/">HeartRep</a>
+					<p style={{ color: 'white' }}>HeartRep</p>
 				</div>
 				
 				<div>
 					<SearchBar
-						onSearchChange={onSearchChange}
-						onSubmit={onSubmit}
-						dataSource={dataSource}
-						searchKey={searchKey}
+						{...props}
 					/>
 				</div>
 			
