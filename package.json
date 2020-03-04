@@ -2,7 +2,11 @@
   "name": "github",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.16.1"
+  },
   "dependencies": {
+    "antd": "^4.0.1",
     "apollo-boost": "^0.4.7",
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.2.8",

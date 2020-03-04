@@ -7,22 +7,20 @@ import './Header.css'
 // components
 import SearchBar from '../../components/SearchBar'
 
+const HEADER = {
+	color: 'white',
+	marginTop: 20,
+	fontSize: 20
+}
+
 export const Header = props => {
-	const {
-		dataSource, onSearchChange, onSubmit, searchKey,
-		toggleSearch
-	} = props
 	
 	return (
 		<header className="header">
 			<nav className="header-nav">
 				
 				<div className="header-logo">
-					<p style={{
-						color: 'white',
-						marginTop: 20,
-						fontSize: 20,
-					}}>
+					<p style={HEADER}>
 						HeartRep
 					</p>
 				</div>

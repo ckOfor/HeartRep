@@ -12,6 +12,7 @@ import { gql } from 'apollo-boost';
 import Header from './common/Header'
 
 // styles
+import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Card from './components/Card/Card'
@@ -38,18 +39,18 @@ class App extends Component {
 		toggleSearchView: false,
 		loading: false
 	}
-
+	
 	/**
-	 * searchForRepos
 	 *
+	 * @param {boolean} - searching
+	 * @param {string} - searchKey
 	 */
-	searchForRepos = () => {
-		const { searchKey } = this.state
-		this.setState((prevState) => {
-			return {
-				loading: !prevState.loading,
-			}
-		})
+	searchForRepos = (searching, searchKey) => {
+		
+		if(searching) {
+			this.setState({ loading: true })
+		}
+		
 		
 		client
 		.query({
@@ -93,39 +94,36 @@ class App extends Component {
 		})
 		.then(result => {
 			
-			this.setState((prevState) => {
-				return {
-					loading: !prevState.loading,
-					cardList: result.data.search.nodes
-				}
-			})
-			
-			this.saveSearch(result.data.search.nodes)
+			return searching
+				? this.setState((prevState) => {
+					return {
+						loading: false,
+						cardList: result.data.search.nodes
+					}
+				})
+				: this.saveSearch(result.data.search.nodes)
 		})
 		.catch((error) => {
-			console.log(error)
-			this.setState((prevState) => {
-				return {
-					loading: !prevState.loading,
-				}
-			})
+			this.setState({ loading: true })
 		})
 	}
 
 	/**
 	 * onSearchChange
 	 *
-	 * @param value
+	 * @param {string} - searchKey
 	 */
 	onSearchChange = searchKey => {
-		this.setState({ searchKey });
-		return searchKey.length > 2 && this.searchForRepos()
+		this.setState({
+			searchKey
+		})
+		return searchKey.length > 2 && this.searchForRepos(false, searchKey)
 	};
 
 	/**
 	 * saveSearch
 	 *
-	 * @param data
+	 * @param {object} - key
 	 */
 	saveSearch = (data) => {
 		const dataSource = []
@@ -139,23 +137,28 @@ class App extends Component {
 		
 		this.setState({ dataSource })
 	}
-
+	
 	/**
-	 * onSubmit
+	 * toggleSearch
 	 *
-	 * @param value
 	 */
-	onSubmit = ({ value }) => {
-		this.setState({ searchKey: value }, () => this.toggleSearch())
-	}
-
 	toggleSearch = () => {
-		console.log(this.state.searchKey)
-		this.setState((prevState) => {
-			return {
-				toggleSearchView: true
-			}
-		}, () => this.searchForRepos())
+		console.log('called')
+		const { searchKey } = this.state
+		this.setState({
+			toggleSearchView: true,
+		}, () => this.searchForRepos(true, searchKey))
+	}
+	
+	/**
+	 * deleteCard
+	 *
+	 * @param {string} - nameWithOwner
+	 */
+	deleteCard = (nameWithOwner) => {
+		const list = this.state.cardList
+		const cardList = list.filter((activity) => activity.nameWithOwner !== nameWithOwner);
+		this.setState({ cardList })
 	}
 
   render() {
@@ -173,7 +176,6 @@ class App extends Component {
 	      >
 		      <Header
 			      onSearchChange={this.onSearchChange}
-			      onSubmit={this.onSubmit}
 			      dataSource={dataSource}
 			      searchKey={searchKey}
 			      toggleSearch={this.toggleSearch}
@@ -183,6 +185,7 @@ class App extends Component {
 			      {
 				      toggleSearchView && (
 					      <Card
+						      deleteCard={this.deleteCard}
 						      loading={loading}
 						      cardList={cardList}
 					      />

@@ -1,5 +1,5 @@
 // react
-import React, { useState } from 'react';
+import React  from 'react';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 	const paginationNumber = [];
@@ -9,7 +9,11 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 	}
 	
 	return (
-		<nav>
+		<nav
+			style={{
+				marginTop: '5%'
+			}}
+		>
 			<ul className="pagination">
 				{
 					paginationNumber.map(number => (

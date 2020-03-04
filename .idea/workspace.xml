@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b87b2e5-7307-4375-b013-3834c37e4c1e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Pagination/Pagination.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Card/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Card/Card.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/Header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Pagination/Pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +73,8 @@
       <updated>1582948798398</updated>
       <workItem from="1582948799734" duration="22763000" />
       <workItem from="1583182243374" duration="29000" />
-      <workItem from="1583241378551" duration="8043000" />
+      <workItem from="1583241378551" duration="8799000" />
+      <workItem from="1583316566303" duration="7015000" />
     </task>
     <servers />
   </component>
@@ -110,10 +110,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="479" y="83" key="RollbackChangesDialog/0.0.1440.900@0.0.1440.900" timestamp="1583246600155" />
-    <state x="377" y="196" width="685" height="508" key="find.popup" timestamp="1583182271247">
+    <state x="377" y="196" width="685" height="508" key="find.popup" timestamp="1583326263343">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="377" y="196" width="685" height="508" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583182271247" />
+    <state x="377" y="196" width="685" height="508" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583326263343" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1583150241013">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -125,7 +125,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/Card/Card.js</url>
           <line>1</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

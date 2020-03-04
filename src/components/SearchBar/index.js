@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
 	}
 
 	render () {
-		const { dataSource, onSubmit, searchKey, toggleSearch } = this.props
+		const { dataSource, searchKey, toggleSearch } = this.props
 		
 		return (
 			<div>
@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
 						className={'input'}
 						value={searchKey}
 						onInputChange={this.handleSearchChange}
-						onChange={onSubmit}
+						onChange={toggleSearch}
 						options={dataSource}
 						placeholder={'Search by repository name...'}
 						autoFocus
