@@ -1,14 +1,76 @@
 // react
 import React, { useState } from 'react';
 
+// third-party libraries
+import { Modal } from 'antd';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
+
+// components
+import Pagination from '../Pagination/Pagination'
+
 // images
 import eye from '../../assets/eye.png';
 import fork from '../../assets/fork.png';
 import star from '../../assets/star.png';
-import Pagination from '../Pagination/Pagination'
+
+const { confirm } = Modal;
+
+// styles
+const TOP_LEVEL = {
+	height: '100%',
+	width: '40%',
+}
+
+const AVATAR = {
+	height: '100%',
+	width: '100%',
+	borderRadius: '8px'
+}
+
+const MIDDLE_LEVEL = {
+	height: '100%',
+	width: '60%',
+	margin: '3%',
+	display: "flex",
+	flexDirection: "column",
+	justifyContent: "space-between"
+}
+
+const HEADER = {
+	display: "flex",
+	flexDirection: "row",
+	justifyContent: "space-between"
+}
+
+const LINKS = {
+	textDecoration: "none"
+}
+
+const BOTTOM_LEVEL = {
+	display: "flex",
+	flexDirection: "row",
+	justifyContent: "space-between",
+	marginBottom: '3%'
+}
+
+const BOTTOM_LEVEL_DIV = {
+	height: '100%',
+	width: '40%',
+}
+
+const BOTTOM_LEVEL_IMAGE = {
+	height: '100%',
+	width: '100%',
+}
+
+const FORK_IMAGE = {
+	height: '50%',
+	width: '50%',
+	marginLeft: '30%',
+}
 
 const Card = props => {
-	const { cardList, loading } = props
+	const { cardList, loading, deleteCard } = props
 	
 	const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage] = useState(10)
@@ -19,6 +81,26 @@ const Card = props => {
 	
 	const paginate = (pageNumber) => {
 		setCurrentPage(pageNumber)
+	}
+	
+	/**
+	 * showDeleteConfirm
+	 *
+	 * @param {string} - nameWithOwner
+	 */
+	const showDeleteConfirm = (nameWithOwner) => {
+		confirm({
+			title: 'Are you sure you want to delete?',
+			okText: 'Yes',
+			okType: 'danger',
+			cancelText: 'No',
+			onOk() {
+				deleteCard(nameWithOwner)
+			},
+			onCancel() {
+				console.log('Cancel');
+			},
+		});
 	}
 	
 	if(loading) {
@@ -39,21 +121,17 @@ const Card = props => {
 						name, url, nameWithOwner, owner, watchers, forkCount, stargazers
 					} = result
 					const { login, avatarUrl } = owner
-					console.log(result)
+					
 					return (
-						<div className="App-card" key={index}>
+						<div
+							className="App-card"
+							key={index}
+						>
 							<div
-								style={{
-									height: '100%',
-									width: '40%',
-								}}
+								style={TOP_LEVEL}
 							>
 								<img
-									style={{
-										height: '100%',
-										width: '100%',
-										borderRadius: '8px'
-									}}
+									style={AVATAR}
 									src={avatarUrl}
 									alt="Avatar"
 								/>
@@ -61,50 +139,60 @@ const Card = props => {
 							
 							
 							<div
-								style={{
-									height: '100%',
-									width: '60%',
-									margin: '3%',
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "space-between"
-								}}
+								style={MIDDLE_LEVEL}
 							>
 								<div>
-									<a
-										style={{
-											textDecoration: 'none',
-										}}
-										target="_blank"
-										href={`${url}`}
+									<div
+										style={HEADER}
 									>
-										{name.charAt(0).toUpperCase() + name.slice(1)}
-									</a>
+										<a
+											style={LINKS}
+											target="_blank"
+											href={`${url}`}
+										>
+											{name.charAt(0).toUpperCase() + name.slice(1)}
+										</a>
+										
+										<DeleteOutlined
+											onClick={() => showDeleteConfirm(nameWithOwner)}
+										/>
+										
+									</div>
 									
 									<p
-										style={{
-											textDecoration: 'none',
-										}}
+										style={LINKS}
 									>
 										{login}
 									</p>
 								</div>
 								
 								<div
-									style={{
-										display: "flex",
-										flexDirection: "row",
-										justifyContent: "space-between",
-										marginBottom: '3%'
-									}}
+									style={BOTTOM_LEVEL}
 								>
 									
 									<div className="App-bottom-card">
 										<div
+											style={BOTTOM_LEVEL_DIV}
+										>
+											<img
+												style={FORK_IMAGE}
+												src={fork}
+												alt="Avatar"
+											/>
+										</div>
+										
+										<a
 											style={{
-												height: '100%',
-												width: '40%',
+												textDecoration: 'none',
 											}}
+										>
+											{forkCount}
+										</a>
+									</div>
+									
+									<div className="App-bottom-card">
+										<div
+											style={BOTTOM_LEVEL_DIV}
 										>
 											<img
 												style={{
@@ -117,9 +205,7 @@ const Card = props => {
 										</div>
 										
 										<a
-											style={{
-												textDecoration: 'none',
-											}}
+											style={LINKS}
 										>
 											{watchers.totalCount}
 										</a>
@@ -127,55 +213,19 @@ const Card = props => {
 									
 									<div className="App-bottom-card">
 										<div
-											style={{
-												height: '100%',
-												width: '40%',
-											}}
+											style={BOTTOM_LEVEL_DIV}
 										>
 											<img
-												style={{
-													height: '100%',
-													width: '100%',
-												}}
+												style={BOTTOM_LEVEL_IMAGE}
 												src={star}
 												alt="Avatar"
 											/>
 										</div>
 										
 										<a
-											style={{
-												textDecoration: 'none',
-											}}
+											style={LINKS}
 										>
 											{stargazers.totalCount}
-										</a>
-									</div>
-									
-									<div className="App-bottom-card">
-										<div
-											style={{
-												height: '100%',
-												width: '40%',
-											}}
-										>
-											<img
-												style={{
-													height: '50%',
-													width: '50%',
-													marginLeft: '30%',
-													// marginTop: '15%'
-												}}
-												src={fork}
-												alt="Avatar"
-											/>
-										</div>
-										
-										<a
-											style={{
-												textDecoration: 'none',
-											}}
-										>
-											{forkCount}
 										</a>
 									</div>
 								
